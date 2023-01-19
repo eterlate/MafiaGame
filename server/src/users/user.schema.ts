@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import * as mongoose from 'mongoose';
-import { Role } from './role.schema';
+import { Role } from '../roles/role.schema';
 import { ApiProperty } from '@nestjs/swagger';
 
 export type UserDocument = HydratedDocument<User>;
@@ -32,7 +32,7 @@ export class User {
   @Prop()
   avatar: string;
 
-  @ApiProperty({example: '[ObjectId, OjectId]', description: 'array of account roles'})
+  @ApiProperty({example: '[ObjectId, ObjectId]', description: 'array of account roles'})
   @Prop({type:[{type: mongoose.Schema.Types.ObjectId, ref: 'Role'}]})
   roles: Role[];
 }

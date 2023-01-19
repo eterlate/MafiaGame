@@ -16,9 +16,9 @@ export class CreateUserDto {
     @ApiProperty({example: 'eterlate@gmail.com', description: 'account mail adres'})
     readonly mail: string
 
-    @ApiProperty({example: 'img.png', description: 'account picture'})
-    readonly avatar: string
+    // @ApiProperty({example: 'img.png', description: 'account picture'})
+    // readonly avatar: string
 
-    @ApiProperty({example: '[ObjectId, OjectId]', description: 'array of account roles'})
-    readonly roles: []
+    // @ApiProperty({example: '[ObjectId, OjectId]', description: 'array of account roles'})
+    // readonly roles: []
 }

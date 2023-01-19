@@ -25,7 +25,7 @@ export class UserController {
     @ApiResponse({status: 200, type: [User]})
     @Get()
     getAll(){
-        return this.userService.gelAllUsers()
+        return this.userService.getAllUsers()
     }
 
 }

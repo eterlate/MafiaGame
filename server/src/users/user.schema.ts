@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import * as mongoose from 'mongoose';
-import { Role } from '../roles/role.schema';
 import { ApiProperty } from '@nestjs/swagger';
+
+import { Role, RoleDocument } from '../roles/role.schema';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -34,7 +35,7 @@ export class User {
 
   @ApiProperty({example: '[ObjectId, ObjectId]', description: 'array of account roles'})
   @Prop({type:[{type: mongoose.Schema.Types.ObjectId, ref: 'Role'}]})
-  roles: mongoose.ObjectId[];
+  roles: RoleDocument[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

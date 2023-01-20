@@ -11,14 +11,14 @@ import { AddRoleDto } from './dtos/add-role.dto';
 export class UserService {
 
     constructor (@InjectModel(User.name) private userModel: Model<UserDocument>,
-                 @InjectModel(User.name) private roleModel: Model<RoleDocument>,
+                 @InjectModel(Role.name) private roleModel: Model<RoleDocument>,
                  private roleService: RoleService){}
 
     async createUser(dto: CreateUserDto): Promise<User> {
         const user = await this.userModel.create({...dto})
         const role = await this.roleService.getRoleByValue('USER')
         await user.updateOne({roles: [role._id]})
-        user.roles = [role._id]
+        user.roles = [role]
         return user
     }
 
@@ -39,7 +39,9 @@ export class UserService {
     async addRole(dto: AddRoleDto) {
         const user = await this.userModel.findById({_id: dto.userId})
         const role = await this.roleModel.findOne({value:dto.value})
-        console.log(user.roles.includes(role._id))
+        if(user.roles.filter(role=>role._id).length !== 0){
+            throw new HttpException('User already have this role', HttpStatus.NOT_FOUND)
+        }
         if (user && role) {
             const updatedUser = await user.updateOne({$push:{roles: role._id}})
             return updatedUser

@@ -10,12 +10,12 @@ export class RoleService {
     constructor (@InjectModel(User.name) private userModel: Model<UserDocument>,
                  @InjectModel(Role.name) private roleModel: Model<RoleDocument>){}
 
-    async createRole(dto: CreateRoleDto):Promise<Role> {
+    async createRole(dto: CreateRoleDto):Promise<RoleDocument> {
         const role = await this.roleModel.create({...dto})
         return role
     }
 
-    async getRoleByValue(value: string) {
+    async getRoleByValue(value: string): Promise<RoleDocument> {
         const role = await this.roleModel.findOne({value: value})
         return role
     }

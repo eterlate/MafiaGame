@@ -13,35 +13,36 @@ export class AuthService {
 
     async login(dto: LoginUserDto) {
         const user = await this.validateUser(dto)
+        console.log(user)
         return this.generateToken(user)
     }
 
     async registration(dto: CreateUserDto) {
         const candidate = await this.userService.getUserByUsername(dto.username)
-        if(candidate){
+        if (candidate) {
             throw new HttpException('User already exist', HttpStatus.BAD_REQUEST)
         }
         const hashPassword = await bcrypt.hash(dto.password, 5)
-        const user = await this.userService.createUser({...dto, password: hashPassword})
+        const user = await this.userService.createUser({ ...dto, password: hashPassword })
         return this.generateToken(user)
     }
 
     private async generateToken(user: User) {
-        const tokenData = {email: user.mail, username: user.username, roles: user.roles}
+        const tokenData = { email: user.mail, username: user.username, roles: user.roles }
         return {
             token: this.jwtService.sign(tokenData)
         }
     }
 
-    private async validateUser(dto: LoginUserDto){
+    private async validateUser(dto: LoginUserDto) {
         const user = await this.userService.getUserByUsername(dto.username)
-        if(!user){
-            throw new UnauthorizedException({message:'User does not exist'})
+        if (!user) {
+            throw new UnauthorizedException({ message: 'User does not exist' })
         }
         const isPassword = await bcrypt.compare(dto.password, user.password)
-        if (user && isPassword){
+        if (user && isPassword) {
             return user
         }
-        throw new UnauthorizedException({message:'Wrong email or password'})
+        throw new UnauthorizedException({ message: 'Wrong email or password' })
     }
 }

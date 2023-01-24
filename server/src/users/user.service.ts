@@ -39,7 +39,8 @@ export class UserService {
     async addRole(dto: AddRoleDto) {
         const user = await this.userModel.findById({_id: dto.userId})
         const role = await this.roleModel.findOne({value:dto.value})
-        if(user.roles.filter(role=>role._id).length !== 0){
+
+        if(user.roles.includes(role.id)){
             throw new HttpException('User already have this role', HttpStatus.NOT_FOUND)
         }
         if (user && role) {

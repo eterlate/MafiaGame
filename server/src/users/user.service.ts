@@ -14,7 +14,7 @@ export class UserService {
                  @InjectModel(Role.name) private roleModel: Model<RoleDocument>,
                  private roleService: RoleService){}
 
-    async createUser(dto: CreateUserDto): Promise<User> {
+    async createUser(dto: CreateUserDto): Promise<UserDocument> {
         const user = await this.userModel.create({...dto})
         const role = await this.roleService.getRoleByValue('USER')
         await user.updateOne({roles: [role._id]})

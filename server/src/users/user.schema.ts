@@ -3,31 +3,27 @@ import { HydratedDocument } from 'mongoose';
 import * as mongoose from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { Role, RoleDocument } from '../roles/role.schema';
+import { RoleDocument } from '../roles/role.schema';
 
 export type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User {
   @ApiProperty({example: 'eterlate', description: 'account name'})
-  @Prop()
+  @Prop({required: true})
   username: string;
 
   @ApiProperty({example: 'passstr', description: 'authorization password'})
-  @Prop()
+  @Prop({required: true})
   password: string;
 
   @ApiProperty({example: 'Sasha', description: 'user name'})
   @Prop()
   name: string;
 
-  @ApiProperty({example: 'Mangus', description: 'user lastname'})
+  @ApiProperty({example: '2342345', description: 'telegram chat id'})
   @Prop()
-  lastname: string;
-
-  @ApiProperty({example: 'eterlate@gmail.com', description: 'account mail adres'})
-  @Prop()
-  mail: string;
+  chatId: string;
 
   @ApiProperty({example: 'img.png', description: 'account picture'})
   @Prop()

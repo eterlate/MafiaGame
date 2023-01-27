@@ -9,10 +9,7 @@ export class CreateUserDto {
 
     @ApiProperty({example: 'Sasha', description: 'user name'})
     readonly name: string
-
-    @ApiProperty({example: 'Mangus', description: 'user lastname'})
-    readonly lastname: string
-
+    
     @ApiProperty({example: 'eterlate@gmail.com', description: 'account mail adres'})
     readonly mail: string
 

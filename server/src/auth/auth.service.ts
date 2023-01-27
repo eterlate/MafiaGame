@@ -4,7 +4,7 @@ import { CreateUserDto } from 'src/users/dtos/create-user.dto';
 import { UserService } from 'src/users/user.service';
 import { LoginUserDto } from './dtos/login-user.dto';
 import * as bcrypt from 'bcryptjs'
-import { User } from 'src/users/user.schema';
+import { User, UserDocument } from 'src/users/user.schema';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,6 @@ export class AuthService {
 
     async login(dto: LoginUserDto) {
         const user = await this.validateUser(dto)
-        console.log(user)
         return this.generateToken(user)
     }
 
@@ -27,8 +26,8 @@ export class AuthService {
         return this.generateToken(user)
     }
 
-    private async generateToken(user: User) {
-        const tokenData = { email: user.mail, username: user.username, roles: user.roles }
+    private async generateToken(user: UserDocument) {
+        const tokenData = { id:user._id, username: user.username, name: user.name, roles: user.roles, chatId: user.chatId }
         return {
             token: this.jwtService.sign(tokenData)
         }

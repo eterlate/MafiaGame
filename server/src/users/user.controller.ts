@@ -14,11 +14,15 @@ export class UserController {
 
     @ApiOperation({summary: 'Creating user'})
     @ApiResponse({status: 200, type: User})
+    @Roles('ADMIN')
+    @UseGuards(RolesGuard)
     @Post()
     create(@Body() dto: CreateUserDto) {
         return this.userService.createUser(dto)
     }
 
+    @Roles('ADMIN')
+    @UseGuards(RolesGuard)
     @Delete()
     delete(){
 
@@ -33,7 +37,7 @@ export class UserController {
         return this.userService.getAllUsers()
     }
 
-    @ApiOperation({summary: 'User role change'})
+    @ApiOperation({summary: 'User role add'})
     @ApiResponse({status: 200})
     @Roles('ADMIN')
     @UseGuards(RolesGuard)

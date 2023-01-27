@@ -8,6 +8,10 @@ import { RoleService } from './roles/role.service';
 import { RoleController } from './roles/role.controller';
 import { RoleModule } from './roles/role.module';
 import { JwtAuthGuard } from "./auth/jtw-auth.guard";
+import { SessionModule } from './session/session.module';
+import { PlayerController } from './player/player.controller';
+import { PlayerService } from './player/player.service';
+import { PlayerModule } from './player/player.module';
 
 @Module({
     imports: [
@@ -17,7 +21,11 @@ import { JwtAuthGuard } from "./auth/jtw-auth.guard";
         MongooseModule.forRoot(process.env.MONGO_URL),
         UserModule,
         AuthModule,
-        RoleModule
-    ]
+        RoleModule,
+        SessionModule,
+        PlayerModule
+    ],
+    controllers: [PlayerController],
+    providers: [PlayerService]
 })
 export class AppModule {}

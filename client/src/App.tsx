@@ -1,9 +1,10 @@
 import React from 'react';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
     <div className="App">
-      <h1>main</h1>
+      <AuthPage></AuthPage>
     </div>
   );
 }

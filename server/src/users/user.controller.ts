@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ObjectId } from 'mongoose';
 import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { AddRoleDto } from './dtos/add-role.dto';
@@ -23,9 +24,9 @@ export class UserController {
 
     @Roles('ADMIN')
     @UseGuards(RolesGuard)
-    @Delete()
-    delete(){
-
+    @Delete('/:id')
+    delete(@Param('id') id: ObjectId){
+        return this.userService.deleteUser(id)
     }
 
     @ApiOperation({summary: 'Getting list of all users'})

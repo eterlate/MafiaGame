@@ -22,21 +22,22 @@ export class UserService {
         return user
     }
 
-    async deleteUser() {
-
+    async deleteUser(id: ObjectId) {
+        const deletedUser = await this.userModel.deleteOne({_id: id})
+        return deletedUser
     }
 
-    async getAllUsers(): Promise <User[]> {
+    async getAllUsers(): Promise <UserDocument[]> {
         const users = await this.userModel.find()
         return users
     }
 
-    async getUserByUsername(username: string) {
+    async getUserByUsername(username: string): Promise<UserDocument> {
         const user = await this.userModel.findOne({username: username}).populate('roles')
         return user
     }
 
-    async addRole(dto: AddRoleDto) {
+    async addRole(dto: AddRoleDto): Promise<UserDocument> {
         const user = await this.userModel.findById({_id: dto.userId})
         const role = await this.roleModel.findOne({value:dto.value})
 

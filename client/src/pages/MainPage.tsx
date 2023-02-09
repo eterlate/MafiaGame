@@ -2,7 +2,7 @@ import React from 'react'
 
 const MainPage = () => {
   return (
-    <div>hallo!!!</div>
+    <div>Тут будут правила и пояснения</div>
   )
 }
 

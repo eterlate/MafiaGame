@@ -1,0 +1,40 @@
+header {
+    background-color: $green;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 50px;
+    align-items: center;
+
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .nav_block {
+            .navlink{
+                margin: 40px;
+            }
+            .navlink_active{
+                margin: 40px;
+            }
+
+        }
+
+        .navlink {
+            text-decoration: none;
+            color: $bordo;
+            &:hover {
+                color: black;
+            }
+        }
+
+        .navlink_active {
+            font-weight: bold;
+            color: $bordo;
+            &:hover {
+                color: black;
+            }
+        }
+    }
+}

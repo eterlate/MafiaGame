@@ -1,3 +1,14 @@
+$beige: #ece0bc;
+$sand: #d4cab2;
+$green: #7f8065;
+$darkGreen: #36352d;
+$bordo: #4f131b;
+
+@import './styles/Header.scss';
+
+body{
+    background-color: $beige;
+}
 * {
     margin: 0;
     padding: 0;
@@ -5,17 +16,9 @@
     font-family: 'Roboto';
 }
 
-header{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: aqua;
-}
-
 footer{
     width: 100%;
-    background-color: aquamarine;
+    background-color: $green;
     display: flex;
     justify-content: center;
     padding: 10px;

@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { useRoutes } from './Router';
 import { ToastContainer } from 'react-toastify';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Footer from './components/partials/Footer';
+import Header from './components/partials/Header';
 import { useAppSelector } from './hooks/Redux.hook';
 import 'react-toastify/dist/ReactToastify.css';
 

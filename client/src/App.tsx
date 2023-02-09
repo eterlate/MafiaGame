@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import { useAppSelector } from './hooks/Redux.hook';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { token } = useAppSelector(state => state.auth)

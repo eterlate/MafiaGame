@@ -18,6 +18,7 @@ export const useHttp = () => {
             if(!response.ok){
                 throw new Error(data.message || 'Unknown request error')
             }
+            
             setLoading(false)
             return data
         }catch(e){

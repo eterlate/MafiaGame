@@ -17,7 +17,6 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         login(state, action: PayloadAction<IUserStorage>) {
-            console.log(action.payload)
             localStorage.setItem('UserDataStorage', JSON.stringify({
                 username: action.payload.username,
                 token: action.payload.token

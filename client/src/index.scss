@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+
+header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: aqua;
+}
+
+footer{
+    width: 100%;
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+    min-height: calc(100vh - 77px);
+}

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 import { useHttp } from '../hooks/Http.hook'
 import { useAppDispatch, useAppSelector } from '../hooks/Redux.hook'
 import { login } from '../store/reducers/authSlice'
 
 const AuthPage = () => {
-    const { request, loading } = useHttp()
+    const { request, loading, error } = useHttp()
 
     const dispatch = useAppDispatch()
     const { token, username } = useAppSelector(state => state.auth)
@@ -21,8 +22,13 @@ const AuthPage = () => {
     const enter = () => {
         request('http://localhost:4000/auth/login', 'POST', form)
             .then(json => {
-                dispatch(login({ token: json.token, username: form.username }))
-
+                if(json.token){
+                    dispatch(login({ token: json.token, username: form.username }))
+                    toast.success('Вы вошли в аккаунт')
+                }
+            })
+            .catch(e=>{
+                toast.error(e.message)  
             })
 
     }
@@ -37,15 +43,6 @@ const AuthPage = () => {
             <input type="password" name="password" id="password" onChange={changeHandler} />
 
             <button onClick={enter}>Войти</button>
-            {loading
-                ?
-                <h1>Loading...</h1>
-                :
-                <>
-                    <h1>{token}</h1>
-                    <h1>{username}</h1>
-                </>
-            }
 
         </div>
     )

@@ -7,17 +7,9 @@ import { logout } from '../../store/reducers/authSlice'
 const Header = () => {
   const dispatch = useAppDispatch()
   const { token } = useAppSelector(state => state.auth)
-  const exit = () => {
-    dispatch(logout())
-    toast.done('Вы вышли')
-  }
 
-  const [activeLink, setActiveLink] = useState({
-    name: ''
-  })
-  const changeActive = (name: string) => {
-    setActiveLink({ name: name })
-  }
+  
+
 
   return (
     <header>
@@ -30,8 +22,12 @@ const Header = () => {
           <NavLink to={'/find_session'} className={({ isActive }) => isActive ? 'navlink_active' : 'navlink'}>Найти сессию</NavLink>
         </div>
 
-
+        {token ?
         <NavLink to={'/profile'} className={({ isActive }) => isActive ? 'navlink_active' : 'navlink'}>Профиль</NavLink>
+        :
+        <NavLink to={'/auth'} className={({ isActive }) => isActive ? 'navlink_active' : 'navlink'}>Вход</NavLink>
+        }
+        
 
 
         {/* {token ?

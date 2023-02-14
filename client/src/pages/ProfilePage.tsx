@@ -8,7 +8,7 @@ import { logout } from '../store/reducers/authSlice';
 
 
 
-const ProfilePage = () => {
+const ProfilePage: React.FC = () => {
   const dispatch = useAppDispatch()
   const { token } = useAppSelector(state => state.auth)
   const userData: IUserData = jwtDecode(token)
@@ -18,20 +18,24 @@ const ProfilePage = () => {
     toast.done('Вы вышли')
   }
 
-  console.log(userData.roles.map((el)=>{console.log(el.description)}))
-  console.log(userData.roles)
   return (
-
     <div className='profile_container'>
-      <h1>{userData.name}</h1>
-      <h1>{userData.chatId}</h1>
-      <h1>{userData.id}</h1>
-      <h1>{userData.username}</h1>
-      <>
-        {userData.roles.map((el) => {
-          <p>{el.value}</p>
-        })}
-      </>
+      {userData.chatId ?
+        <h1>Ваш аккаунт подтвержден</h1>
+        :
+        <>
+          <h1>Ваш аккаунт не подтвержден</h1>
+          <p>Для игры необходимо подтвердить аккаунт через телеграм бота</p>
+          <button></button>
+        </>
+      }
+      <h3>Имя: {userData.name}</h3>
+      <h3>Логин: {userData.username}</h3>
+
+      {/* {userData.roles.map(el =>
+        <h1 key={el._id}>{el.value}</h1>
+      )} */}
+
       <a onClick={exit}>Выйти</a>
     </div>
   )
